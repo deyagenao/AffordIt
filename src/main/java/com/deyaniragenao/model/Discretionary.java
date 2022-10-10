@@ -1,9 +1,15 @@
 package com.deyaniragenao.model;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -14,23 +20,30 @@ import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "discretionary_items")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Category {
+public class Discretionary {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
-	String name;
+	@GeneratedValue
+	long id;
+	@Column(nullable = false)
+	BigDecimal amount;
 	String description;
+	@Column(nullable = false)
+	Date date;
 	
-	public Category(String name, String desc) {
-		this.name = name;
-		this.description = desc;
-	}
+	@ManyToOne
+	@JoinColumn(name = "acc_id", nullable = false)
+	private Account account;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
+	
 	
 }

@@ -4,12 +4,17 @@ import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -43,18 +48,30 @@ public class User {
 	Date dateCreated;
 	Date dateLastUpdated;
 	
-	@ManyToMany(mappedBy = "accountUsers")
+	@ManyToMany
+	@JoinTable(
+			name = "users_accounts",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "account_id"))
 	Set<Account> accounts;
+	
+	@OneToMany(mappedBy = "user")
+	Set<Expense> expenses;
+	
+	@OneToMany(mappedBy = "user")
+	Set<Income> incomes;
+	
+	@OneToMany(mappedBy = "user")
+	Set<Discretionary> discretionaryItems;
 
 	public User(String firstName, String lastName, String email, String password, Date dateCreated,
-			Date dateLastUpdated, Set<Account> accounts) {
+			Date dateLastUpdated) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.dateCreated = dateCreated;
 		this.dateLastUpdated = dateLastUpdated;
-		this.accounts = accounts;
 	}
 	
 	

@@ -9,9 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -41,12 +40,17 @@ public class Account {
 	Date dateCreated;
 	Date dateLastUpdated;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "accounts_users",
-			joinColumns = @JoinColumn(name = "account_id"),
-			inverseJoinColumns = @JoinColumn(name = "user_id"))
+	@ManyToMany(mappedBy = "accounts")
 	Set<User> accountUsers;
+	
+	@OneToMany(mappedBy = "account")
+	Set<Expense> expenses;
+	
+	@OneToMany(mappedBy = "account")
+	Set<Income> incomes;
+	
+	@OneToMany(mappedBy = "account")
+	Set<Discretionary> discretionaryItems;
 
 	public Account(String name, String description, Date dateCreated, Date dateLastUpdated, Set<User> accountUsers) {
 		this.name = name;
