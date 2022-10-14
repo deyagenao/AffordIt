@@ -1,5 +1,6 @@
 package com.deyaniragenao.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,8 +25,11 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	int id;
+	Integer id;
+	@Column(nullable = false)
 	String name;
+	@Column(nullable = false)
+	String type;
 	String description;
 	
 	public Category(String name, String desc) {

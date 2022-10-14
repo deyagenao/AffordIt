@@ -13,9 +13,10 @@ public abstract class FinancialEntry {
 	
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 	@Column(nullable = false)
 	private BigDecimal amount;
+	@Column(name = "desc")
 	private String description;
 	@Column(nullable = false)
 	private String frequency;
