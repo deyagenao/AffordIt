@@ -1,7 +1,112 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Hello</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afford It | Know Your Money</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
+  <header id="header">
+    <div id="header-content">
+       <div id="logo"><a href="index.html"><i class="fa-solid fa-hand-holding-dollar"></i>  Afford It </a></div>
+       <nav id="auth-nav">
+        <ul class="nav-list">
+          <li class="nav-list-item btn light-btn" id="signin-btn"><a th:href="@{/signin}">Sign In  <i class="fa-solid fa-user"></i></a></li>
+          <li class="nav-list-item btn" id="signup-btn"><a th:href="@{/signup}">Sign Up  <i class="fa-solid fa-user-pen"></i></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <section id="headline">
+      <div id="headline-text">
+        <h1>Know Your Money</h1>
+        <p>Having trouble managing your finances? Our financial planner can help you identify your essential expenses and sources of income and keep track of all your spending wants. Whatever you desire, you can <em>Afford It!</em></p>
+        <div class="btn"><a href="signup.html">Get Started</a></div>
+      </div>
+      <div id="headline-img">
+        <img src="img/investment_data.svg" alt="Woman with bills standing in front of graph">
+      </div>
+    </section>
+    <section id="about">
+      <h2>Why <span class="bold-text">Afford It</span>?</h2>
+      <div id="about-cards">
+        <div class="card">
+          <h3 class="card-heading">
+            Shared Accounts
+          </h3>
+          <p class="card-text">
+            Create a shared account to help you budget with family members, roommates, or anyone else you choose.
+          </p>
+          <div class="card-img">
+            <img src="img/chatting.svg" alt="Phone showing chat between 2 people">
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-heading">
+            Detailed Tools
+          </h3>
+          <p class="card-text">
+            Our in-depth financial planner will help you consider all your possible expenses and sources of income.
+          </p>
+          <div class="card-img">
+            <img src="img/online_banking.svg" alt="Man with bill looking at online banking">
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="card-heading">
+            Track Wishlist
+          </h3>
+          <p class="card-text">
+            Know your money so you can spend your money. Keep track of the items you want and preview how they will affect your budget. 
+          </p>
+          <div class="card-img">
+            <img src="img/add_to_cart.svg" alt="Woman adding product to cart">
+          </div>
+        </div>
+      </div>
+      
+    </section>
+  </main>
+  <footer id="main-footer">
+    <div id="services">
+      <table class="services">
+        <tr>
+          <th>Money Moves</th>
+          <th>Tools</th>
+          <th>About</th>
+        </tr>
+        <tr>
+          <td class="link">Save</td>
+          <td class="link">Borrow</td>
+          <td class="link">Invest</td>
+        </tr>
+        <tr>
+          <td class="link">Blog</td>
+          <td class="link">Help Center</td>
+          <td class="link">Resources</td>
+        </tr>
+        <tr>
+          <td class="link">Reviews</td>
+          <td class="link">Careers</td>
+          <td class="link">Legal</td>
+        </tr>
+      </table>
+    </div>
+    <div id="legal">
+      <ul class="privacy-list">
+        <li class="privacy-list-item link">Privacy Notice</li>
+        <li class="privacy-light-item">&bull;</li>
+        <li class="privacy-list-item link">Do Not Sell My Personal Information</li>
+        <li class="privacy-light-item">&bull;</li>
+        <li class="privacy-list-item link">Cookies Preferences</li>
+      </ul>
+      <p id="copyright">&copy; 2022 Afford It Corporation. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>

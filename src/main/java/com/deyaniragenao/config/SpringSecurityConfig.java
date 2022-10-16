@@ -21,7 +21,7 @@ public class SpringSecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 					.authorizeRequests()
-					.antMatchers("/**").permitAll();
+					.antMatchers("/**", "/css/**").permitAll();
 		
 		return http.build();
 				

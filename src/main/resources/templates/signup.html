@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afford It | Sign In</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/authforms.css">
+</head>
+<body>
+  <header id="header">
+    <div id="header-content">
+       <div id="logo"><a href="index.html"><i class="fa-solid fa-hand-holding-dollar"></i>  Afford It </a></div>
+    </div>
+  </header>
+  <main class="main-content">
+    <div id="signup-form-container">
+      <h2>Create New User Account</h2>
+      <form id="signup">
+        <label for="first-name" class="form-label">First Name</label>
+        <input type="text" id="first-name" name="first-name" class="form-input">
+        <div class="error-text"></div>
+        <label for="last-name" class="form-label">Last Name</label>
+        <input type="text" id="last-name" name="last-name" class="form-input">
+        <div class="error-text"></div>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" class="form-input">
+        <div class="error-text"></div>
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-input">
+        <div class="error-text"></div>
+        <label for="confirm-password" class="form-label">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" class="form-input">
+        <div class="error-text"></div>
+        <label for="marketing" class="form-label">How did you hear about us?</label>
+        <select name="marketing-options" class="form-input"id="marketing">
+            <option value="" selected>--Please choose an option--</option>
+            <option value="social-media">Social Media</option>
+            <option value="advertisement">Advertisement</option>
+            <option value="friends-family">Friends/ Family</option>
+            <option value="other">Other</option>
+        </select>
+        <div class="btn" id="submit-acc-btn">Create Account</div>
+      </form>
+    </div>
+  </main>  
+  <footer id="form-footer">
+    <p id="copyright">&copy; 2022 Afford It Corporation. All rights reserved.</p>
+  </footer>
+</body>
+</html>

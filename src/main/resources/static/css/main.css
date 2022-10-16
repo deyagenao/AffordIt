@@ -1,0 +1,231 @@
+/* main css file across pages */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&display=swap');
+
+
+:root{
+  --background: #fffffe;
+  --dark-bg: #402e9e;
+  --text-color: #2b2c34;
+  --light-text: #fffffe;
+  --logo-color: #402e9e;
+  --button: #6246ea;
+  --light-btn: #fffffe;
+  --light-btn-text: #6246ea;
+  --highlight: #6246ea;
+  --highlight-variant: #7f66f8;
+  --secondary: #d1d1e9;
+  --tertiary: #e45858;
+  --text-font: 'Lato', sans-serif;
+  --text-size: 1em;
+  --logo-size: 2em;
+  --title-size: 4em;
+  --heading-size: 2.5em;
+  --subheading-size: 2em;
+  --lightweight: 300;
+  --bold: 700;
+  --xbold: 900;
+  --border: 1px solid #d3d7dd;
+  --btn-border: 1px solid #6246ea;
+  --br: 5px;
+  --box-shadow: 0 10px 10px 10px rgba(0,0,0, 0.2);
+  --box-shadow-btn: 0 3px 3px 3px rgba(0,0,0, 0.2);
+}
+
+/* reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* general */
+body{
+  box-sizing: border-box;
+  font-family: var(--text-font);
+  font-size: var(--text-size);
+  background-color: var(--background);
+  color: var(--main-font-color);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  height: 100vh;
+  width: 100vw;
+}
+
+h1{
+  font-size: var(--title-size);
+  font-weight: var(--bold);
+}
+
+h2{
+  font-size: var(--heading-size);
+}
+
+h3 {
+  font-size: var(--subheading-size);
+  margin-bottom: 10px;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: var(--main-font-color);
+}
+
+li {
+  list-style: none;
+}
+
+li:hover, a:hover, td:hover{
+  cursor: pointer;
+}
+
+.btn {
+  background: var(--button);
+  color: var(--light-text);
+  text-align: center;
+  border: var(--btn-border);
+  border-radius: var(--br);
+  padding: 10px 25px;
+}
+
+.btn:hover{
+  filter: brightness(120%);
+  box-shadow: var(--box-shadow-btn);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.light-btn{
+  background: var(--light-btn);
+  color: var(--light-btn-text);
+}
+
+.light-btn:hover{
+  background-color: var(--highlight-variant);
+  color: var(--light-text);
+  border-color: var(--highlight-variant);
+  filter: brightness(100%);
+}
+
+
+/* underline hover transition TO DO: Edit for length */
+/* .link{
+  position: relative;
+}
+
+.link:after{
+  content: '';
+  position: absolute;
+  width: 0; height: 3px;
+  display: block;
+  margin-top: 2px;
+  right: 0;
+  background: #fff;
+  transition: width .2s ease;
+  -webkit-transition: width .2s ease;
+}
+ 
+.link:hover:after{
+  width: 100%;
+  left: 0;
+  background: #fff;
+} */
+
+/* Header */
+#header {
+  display: flex; 
+  justify-content: center;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  border-bottom: var(--border);
+}
+
+#header-content {
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#logo {
+  font-size: var(--logo-size);
+  font-weight: var(--xbold);
+}
+
+#logo a, #logo a:visited {
+  color: var(--logo-color);
+}
+
+#logo a:hover{
+  color: var(--highlight);
+}
+
+#header-content nav li{
+  display: inline;
+}
+
+#signin-btn {
+  margin-right: 15px;
+}
+
+/* Footer */
+footer {
+  line-height: 1.5em;
+}
+
+#main-footer {
+  background: var(--dark-bg);
+  color: var(--light-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#services {
+  margin: 0 auto;
+  padding: 30px;
+  font-size: 0.9em;
+}
+
+th{
+  font-weight: 700;
+}
+
+th, td{
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+#legal{
+  text-align: center;
+  font-size: 0.8em;
+  padding: 20px;
+  border-top: var(--border); 
+}
+
+.privacy-list{
+  padding-bottom: 10px;
+  display: flex;
+}
+
+.privacy-list-item {
+  display: inline;
+  width: 275px;
+}
+

@@ -1,0 +1,121 @@
+/* Authentication Forms */
+
+#header{
+  border: none;
+}
+
+#header-content {
+  padding-bottom: 30px;
+  border-bottom: var(--border);
+  justify-content: center;
+}
+
+#signin-content{
+  height: 70vh;
+  width: 90%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly; 
+  padding-top: 70px;
+}
+
+#signin-content h2 {
+  line-height: 2.5em;
+}
+
+#signin-form-container, #create-account-container {
+  width: 90%;
+}
+
+.divider {
+  width: 1px;
+  margin: 0 40px;
+  height: 80%;
+  background: #d3d7dd;
+}
+
+.form-label, .form-input{
+  display: block;
+  width: 80%;
+}
+
+.form-label{
+  font-weight: 600;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  font-family: var(--text-font);
+  height: 25px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: var(--br);
+  border: var(--border);
+}
+
+.form-input:focus {
+  outline: none;
+  border: 2px solid var(--highlight); 
+}
+
+#signin-btn, #create-acc-btn {
+  width: 73%;
+  margin-top: 27px;
+}
+
+#form-footer{
+  text-align: center;
+  padding: 25px 0;
+  border-top: var(--border);
+}
+
+/* Create account specific*/
+#signup-form-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#signup-form-container h2{
+  margin-bottom: 30px;
+  font-size: 2em;
+  line-height: 2em;
+}
+
+#signup{
+  width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#marketing {
+  width: 84%;
+  height: 50px;
+  padding: 10px 10px;
+  font-family: var(--text-font);
+}
+
+#submit-acc-btn {
+  width: 76%;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+/* Form Validation */
+.success {
+  border: 1px solid #2BC710;
+}
+
+.error {
+  border: 1px solid #C52E0F;
+}
+
+.error-text{
+  color: #C52E0F;
+  font-size: 0.75em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
