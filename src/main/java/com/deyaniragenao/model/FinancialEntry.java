@@ -19,6 +19,8 @@ public abstract class FinancialEntry {
 	private Long id;
 	@Column(nullable = false)
 	private BigDecimal amount;
+	@Column(nullable = false)
+	private BigDecimal monthlyAmount;
 	@Column(name = "description")
 	private String description;
 	@Enumerated(EnumType.STRING)
@@ -29,7 +31,7 @@ public abstract class FinancialEntry {
 	
 	@Override
 	public String toString() {
-		return this.getClass().getName() + " [id=" + id + ", amount=" + amount + ", description=" + description + ", frequency="
+		return this.getClass().getName() + " [id=" + id + ", amount=" + amount + ", monthlyAmount=" + monthlyAmount + ", description=" + description + ", frequency="
 				+ frequency + ", date=" + date + "]";
 	}
 	
