@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afford It | Error</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/authforms.css">
+</head>
+<body>
+  <header id="header">
+    <div id="header-content">
+       <div id="logo"><a th:href="@{/}"><i class="fa-solid fa-hand-holding-dollar"></i>  Afford It </a></div>
+    </div>
+  </header>
+  <main id="error">
+    <h3 id="page-error">The page you requested can not be found. You may need to be logged in to view this page.</h3>
+    <div class="btn go-home"><a th:href="@{/}">Return to Home</a></div>
+    <img src="img/page_not_found.svg" alt="404 Page not found">
+    
+  </main>
+  <footer id="form-footer">
+    <p id="copyright">&copy; 2022 Afford It Corporation. All rights reserved.</p>
+  </footer>
+</body>
+</html>

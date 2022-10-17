@@ -34,8 +34,14 @@ public class Category implements Serializable {
 	Integer id;
 	@Column(nullable = false)
 	String name;
+	@Column(nullable = false)
 	String type;
 	String description;
+	
+	public Category(String name, String type) {
+		this.name = name;
+		this.type = type;
+	}
 	
 	public Category(String name, String type, String desc) {
 		this.name = name;

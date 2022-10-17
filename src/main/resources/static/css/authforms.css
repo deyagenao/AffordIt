@@ -119,3 +119,22 @@
   font-weight: 600;
   margin-bottom: 10px;
 }
+
+/* Error page */
+#error {
+  width: 60%;
+  height: 70vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#error img{
+  width: 30vw;
+}
+
+.go-home {
+  margin: 25px;
+}

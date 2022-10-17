@@ -25,11 +25,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@PostMapping("/signup/save")
-	public String saveNewUser(User user) {
-		userService.saveNewUser(user);
-		return "redirect:/signin?success";
-	}
 	
 	// put mapping for user info: maybe will need once UserDto is implemented- for validity 
 	// no need to create delete mapping for user due to Spring REST - or maybe there should be one 

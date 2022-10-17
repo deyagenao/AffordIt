@@ -1,7 +1,80 @@
-<html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Hello</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afford It | Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/userviews.css">
 </head>
 <body>
+  <!-- side navigation -->
+  <nav id="user-nav">
+    <div id="nav-logo"><a th:href="@{/index}"><i class="fa-solid fa-hand-holding-dollar"></i>  Afford It </a></div>
+    
+    <ul id="user-nav-list">
+      <li class="nav-list-item selected-view"><a th:href="@{/userhome}"><i class="fa-solid fa-house-user"></i> Home</a></li>
+      <li class="nav-list-item"><a th:href="@{/expense}"><i class="fa-solid fa-receipt"></i> Expenses</a></li>
+      <li class="nav-list-item"><a th:href="@{/income}"><i class="fa-solid fa-sack-dollar"></i> Income</a></li>
+      <li class="nav-list-item"><a th:href="@{/wishlist}"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+      <li class="nav-list-item"><a th:href="@{/settings}"><i class="fa-solid fa-gear"></i> User Settings</a></li>
+      <li class="nav-list-item"><a th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+    </ul>
+  </nav>
+  <main class="main-user-content">
+    <h1 class="user-content-title">Home</h1>
+    <h2 class="user-content-subtitle"><i class="fa-solid fa-arrow-right"></i> Account Summary</h2>
+    <div class="user-acc-container">
+      <div id="no-account" hidden=>
+        <p>No accounts to display</p>
+        <div class="btn" id="show-acc-form">Start Budgeting!</div>
+      </div>
+      <div id="account-form" hidden=>
+        <h3>Add Account</h3>
+        <form action="" id="existing-acc-form">
+          <label for="accountNo" class="form-label">Joining an Existing Account? </label>
+          <input type="text" class="form-input"
+          name="accountNo" 
+          id="accountNo"
+          placeholder="Enter Account Number">
+          <div class="btn" id="submit-ex-acc">Submit</div>
+        </form>
+        <h3>Create New Account</h3>
+        <form action="" id="new-acc-form">
+          <label for="acc-name" class="form-label">Account Name</label>
+          <input type="text" class="form-input"
+          name="acc-name" 
+          id="acc-name"
+          placeholder="Family, Roommates,Trip">
+          <label for="acc-desc" class="form-label">Description (Optional)</label>
+          <input type="text" class="form-input"
+          name="acc-desc" 
+          id="acc-desc"
+          placeholder="What is this account for?">
+          <div class="btn" id="submit-new-acc">Submit</div>
+        </form>
+      </div>
+      <div id="account-view">
+        <form action="" id="select-account">
+          <select name="account" class="form-input" id="select-acc-input">
+            <option value="accountNo" selected>Family</option>
+            <option value="new-acc">Add New Account</option>
+          </select>
+          <div class="btn" id="select-acc-btn">Go</div>
+        </form>
+        
+        <p id="acc-display">Your Account Number: <span id="account-no">fff800</span></p>
+        <div id="account-summary">
+          <h3>Monthly Expenses: <span id="monthly-ex-sum">$2,750.55</span></h3>
+          <h3>Monthly Income: <span id="monthly-in-sum">$3,250.45</span></h3>
+          <h3 class="sum-message surplus">Way to go! You are earning <span id="amount">$499.90</span> more than you spend each month.</h3>
+          <h3 class="sum-message deficit" hidden=>Uh oh. You are spending <span id="amount">$499.90</span> more than you earn each month.</h3>
+          <div class="btn"><a href="expense.html">Update Your Budget</a></div>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

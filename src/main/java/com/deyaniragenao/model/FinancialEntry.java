@@ -29,6 +29,23 @@ public abstract class FinancialEntry {
 	@Column(nullable = false)
 	LocalDateTime date = LocalDateTime.now();
 	
+	public BigDecimal calculateMonthlyAmount() {
+		BigDecimal monthlyAmount = this.amount;
+		switch(this.frequency) {
+			case WEEKLY:
+				monthlyAmount = monthlyAmount.multiply(new BigDecimal("4"));
+				break;
+			case BIWEEKLY:
+				monthlyAmount = monthlyAmount.multiply(new BigDecimal("2"));
+				break;
+			case MONTHLY: 
+				break;
+			case ANNUALLY:
+				monthlyAmount = monthlyAmount.divide(new BigDecimal("12"));
+		}
+		
+		return monthlyAmount;
+	}
 	@Override
 	public String toString() {
 		return this.getClass().getName() + " [id=" + id + ", amount=" + amount + ", monthlyAmount=" + monthlyAmount + ", description=" + description + ", frequency="

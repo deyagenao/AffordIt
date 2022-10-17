@@ -4,8 +4,10 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.deyaniragenao.dto.UserDto;
 import com.deyaniragenao.model.Account;
 import com.deyaniragenao.model.Expense;
 import com.deyaniragenao.model.Income;
@@ -20,9 +22,25 @@ public class UserService {
 	UserRepository userRepository;
 	@Autowired 
 	AccountRepository accountRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
-	public void saveNewUser(User user) {
+	public void saveNewUser(UserDto userDto) {
+		User user = new User();
+		user.setFirstName(userDto.getFirstName());
+		user.setLastName(userDto.getLastName());
+		user.setEmail(userDto.getEmail());
+		
+		// need to add password encoder in this step 
+		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		
+		// when implementing spring security, add the roles to determine authorization
+		
 		userRepository.save(user);
+	}
+	
+	public User findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
 	}
 	
 	// Account

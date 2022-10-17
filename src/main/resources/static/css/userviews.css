@@ -1,0 +1,153 @@
+/* User Views Styling  */
+
+body{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+#user-nav {
+  grid-column: 1 / 2 ;
+  min-width: 250px;
+  background: var(--highlight);
+  color: var(--light-text);
+}
+
+.main-user-content{
+  grid-column: 2 / 5;
+  padding: 40px;
+  background: var(--background);
+}
+
+#nav-logo {
+  font-size: var(--subheading-size);
+  padding-top: 30px;
+  padding-left: 30px;
+}
+
+#user-nav-list {
+  width: 100%;
+  margin-top: 40px;
+  font-size: 1.25em;
+}
+
+.nav-list-item {
+  margin: 0;
+  padding: 15px 0px;
+  padding-left: 30px;
+  width: 220px;
+}
+
+.nav-list-item:hover{
+  background: var(--secondary);
+  color: var(--highlight);
+  transition: 0.5s;
+}
+
+.nav-list-item i {
+  margin-right: 10px;
+  width: 25px;
+}
+
+.selected-view {
+  background: var(--background);
+  color: var(--highlight);
+  border-left: var(--border);
+  border-top: var(--border);
+  border-bottom: var(--border);
+}
+
+/* main content  */
+.user-content-title{
+  font-size: var(--heading-size);
+  font-weight: 400;
+  margin-bottom: 30px;
+  border-bottom: var(--border);
+}
+
+.user-content-subtitle {
+  font-size: var(--subheading-size);
+}
+
+.user-acc-container {
+  background: var(--secondary);
+  width: 90%;
+  min-height: 65vh;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 15px;
+  border-radius: var(--br);
+  box-shadow: var(--box-shadow);
+}
+
+#no-account p{ 
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: var(--subheading-size);
+  margin-bottom: 20px;
+}
+
+.form-label, .form-input{
+  display: block;
+  width: 80%;
+}
+
+.form-label{
+  font-weight: 600;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  font-family: var(--text-font);
+  height: 25px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: var(--br);
+  border: var(--border);
+}
+
+.form-input:focus {
+  outline: none;
+  border: 2px solid var(--highlight); 
+}
+
+#existing-acc-form input, #existing-acc-form .btn {
+  display: inline;
+}
+
+#acc-desc {
+  height: 50px;
+}
+
+#submit-new-acc {
+  width: 100px;
+}
+
+#account-summary{
+  text-align: center;
+  padding-top: 30px;
+}
+#account-summary span {
+  font-weight: 700;
+}
+#account-summary .btn {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.sum-message{
+  padding-top: 30px;
+}
+
+#select-acc-input{
+  display: inline;
+  height: 45px;
+  width: 175px;
+}
+
+#select-acc-btn {
+  display: inline
+}

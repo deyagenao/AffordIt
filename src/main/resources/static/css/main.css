@@ -94,6 +94,10 @@ li:hover, a:hover, td:hover{
   cursor: pointer;
 }
 
+button{
+	font-family: var(--text-font);
+	font-size: var(--text-size);
+}
 .btn {
   background: var(--button);
   color: var(--light-text);
