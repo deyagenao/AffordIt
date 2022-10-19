@@ -199,3 +199,11 @@ h4{
 #wishlist-description { 
   width: 40%;
 }
+
+.alert {
+	color: var(--tertiary);
+}
+
+.success {
+	color: #15D160;
+}

@@ -25,7 +25,11 @@
   </nav>
   <main class="main-user-content">
     <h1 class="user-content-title">Expenses</h1>
-    <h2 class="user-content-subtitle" id="month-year"><i class="fa-solid fa-arrow-right"></i> October 2022 Total: $2,750.55</h2>
+    <h2 class="user-content-subtitle" id="month-year">
+    	<i class="fa-solid fa-arrow-right"></i> Monthly Total: $
+    	<span id="monthly-ex-sum" th:if="${expenseTotal != null}" th:text="${expenseTotal}"></span>
+        <span id="monthly-ex-sum" th:unless="${expenseTotal != null}">0.00</span>
+   </h2>
     <div class="expense-table-container">
       <h4>Account Expenses</h4>
       <table class="fin-table" id="expense-table">
@@ -34,38 +38,13 @@
         	<td class="fin-category" th:text="${expense.category.name}"></td>
           	<td class="fin-amount" th:text="${expense.amount}"></td>
           	<td class="fin-frequency" th:text="${expense.frequency}"></td>
-          	<td class="edit-fin">
+          	<!-- <td class="edit-fin">
             	<div class="btn"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></div>
-         	 </td>
+         	 </td> -->
           	<td class="delete-fin">
            		<div class="btn"><a th:href="@{/accounts/expenses/{id}/delete/{expId}(id = ${id}, expId=${expense.id})}"><i class="fa-solid fa-trash"></i></a></div>
           	</td>
       	</tr>
-        <tr>
-          <td class="fin-name">Rent</td>
-          <td class="fin-category">Rent/ Mortgage</td>
-          <td class="fin-amount">1200.00</td>
-          <td class="fin-frequency">Monthly</td>
-          <td class="edit-fin">
-            <div class="btn"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></div>
-          </td>
-          <td class="delete-fin">
-            <div class="btn"><a href=""><i class="fa-solid fa-trash"></i></a></div>
-          </td>
-        </tr>
-        <tr>
-          <td class="fin-name">Cell Phone</td>
-          <td class="fin-category">Utilities</td>
-          <td class="fin-amount">48.00</td>
-          <td class="fin-frequency">Monthly</td>
-          <td class="edit-fin">
-            <div class="btn"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></div>
-          </td>
-          <td class="delete-fin">
-            <div class="btn"><a href=""><i class="fa-solid fa-trash"></i></a></div>
-          </td>
-        </tr>
-        
       </table>
     </div>
     <div class="add-expense">

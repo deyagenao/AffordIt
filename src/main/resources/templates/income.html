@@ -25,7 +25,11 @@
   </nav>
   <main class="main-user-content">
     <h1 class="user-content-title">Income</h1>
-    <h2 class="user-content-subtitle" id="month-year"><i class="fa-solid fa-arrow-right"></i> October 2022 Total: $3,250.45</h2>
+    <h2 class="user-content-subtitle" id="month-year">
+    	<i class="fa-solid fa-arrow-right"></i> Monthly Total: $
+    	<span id="monthly-in-sum" th:if="${incomeTotal != null}" th:text="${incomeTotal}"></span>
+        <span id="monthly-in-sum" th:unless="${incomeTotal != null}">0.00</span>
+    </h2>
     <div class="income-table-container">
       <h4>Account Income</h4>
       <table class="fin-table" id="income-table">
@@ -41,31 +45,6 @@
            		<div class="btn"><a th:href="@{/accounts/incomes/{id}/delete/{inId}(id = ${id}, inId=${income.id})}"><i class="fa-solid fa-trash"></i></a></div>
           	</td>
       	</tr>
-        <tr>
-          <td class="fin-name">Pay</td>
-          <td class="fin-category">After-Tax Pay</td>
-          <td class="fin-amount">1000.00</td>
-          <td class="fin-frequency">Biweekly</td>
-          <td class="edit-fin">
-            <div class="btn"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></div>
-          </td>
-          <td class="delete-fin">
-            <div class="btn"><a href=""><i class="fa-solid fa-trash"></i></a></div>
-          </td>
-        </tr>
-        <tr>
-          <td class="fin-name">Property Rent Income</td>
-          <td class="fin-category">Savings/ Investments</td>
-          <td class="fin-amount">1200.00</td>
-          <td class="fin-frequency">Monthly</td>
-          <td class="edit-fin">
-            <div class="btn"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></div>
-          </td>
-          <td class="delete-fin">
-            <div class="btn"><a href=""><i class="fa-solid fa-trash"></i></a></div>
-          </td>
-        </tr>
-        
       </table>
     </div>
     <div class="add-income">

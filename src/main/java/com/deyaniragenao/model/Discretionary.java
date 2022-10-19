@@ -51,11 +51,16 @@ public class Discretionary implements Serializable {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
+	public Discretionary(String name, BigDecimal amount, String description) {
+		this.name = name;
+		this.amount = amount;
+		this.description = description;
+	}
+	
 	@Override
 	public String toString() {
 		return "Discretionary [id=" + id + ", name=" + name +", amount=" + amount + ", description=" + description + ", date=" + dateCreated
 				+ "]";
-	}
-	
+	}	
 	
 }

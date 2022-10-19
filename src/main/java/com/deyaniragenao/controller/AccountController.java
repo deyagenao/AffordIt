@@ -1,5 +1,6 @@
 package com.deyaniragenao.controller;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
@@ -19,15 +20,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.deyaniragenao.dto.FinEntryDto;
 import com.deyaniragenao.model.Account;
 import com.deyaniragenao.model.Category;
+import com.deyaniragenao.model.Discretionary;
 import com.deyaniragenao.model.Expense;
 import com.deyaniragenao.model.Income;
 import com.deyaniragenao.model.User;
 import com.deyaniragenao.service.AccountService;
+import com.deyaniragenao.service.DiscretionaryService;
 import com.deyaniragenao.service.ExpenseService;
 import com.deyaniragenao.service.IncomeService;
 import com.deyaniragenao.service.UserService;
@@ -53,6 +55,8 @@ public class AccountController {
 	ExpenseService expenseService;
 	@Autowired
 	IncomeService incomeService;
+	@Autowired
+	DiscretionaryService discretionaryService;
 	
 	@ModelAttribute("user")
 	public User getSessionUser() {
@@ -69,18 +73,19 @@ public class AccountController {
 	
 	// Account Expenses 
 	@GetMapping("/expenses/{id}")
-	public String getAccountExpensesPage(@PathVariable(required=false) String id, Model model) {
+	public String getAccountExpensesPage(@PathVariable String id, Model model) {
 		model.addAttribute("id", id);
-		//log.info(id);
 		Optional<Account> currAccData = accountService.findById(id);
 		Account account = currAccData.get();
 		model.addAttribute("account", account);
 		
 		Set<Expense> accExpenses = new LinkedHashSet<>();
 		accExpenses = account.getExpenses();
-		
 		log.info(accExpenses.toString());
 		model.addAttribute("expenses", accExpenses);
+		
+		BigDecimal expenseTotal = expenseService.getSumOfAccountExpenses(id);
+		model.addAttribute("expenseTotal", expenseTotal);
 		
 		FinEntryDto newExpense = new FinEntryDto();
 		model.addAttribute("newExpense", newExpense);
@@ -118,7 +123,7 @@ public class AccountController {
 	
 	// Account Income 
 	@GetMapping("/incomes/{id}")
-	public String getAccountIncomesPage(@PathVariable(required = false) String id, Model model) {
+	public String getAccountIncomesPage(@PathVariable String id, Model model) {
 		model.addAttribute("id", id);
 		log.info(id);
 		Optional<Account> currAccData = accountService.findById(id);
@@ -130,6 +135,9 @@ public class AccountController {
 		
 		log.info(accIncomes.toString());
 		model.addAttribute("incomes", accIncomes);
+		
+		BigDecimal incomeTotal = incomeService.getSumOfAccountIncome(id);
+		model.addAttribute("incomeTotal", incomeTotal);
 		
 		FinEntryDto newIncome = new FinEntryDto();
 		model.addAttribute("newIncome", newIncome);
@@ -164,9 +172,53 @@ public class AccountController {
 	
 	// Account Discretionary/ Wishlist 
 	@GetMapping("/wishlist/{id}")
-	public String getAccountWishlistPage(@PathVariable(required = false) String id, Model model) {
+	public String getAccountWishlistPage(@PathVariable String id, Model model) {
+		model.addAttribute("id", id);
+		// retrieving current wishlist items 
+		Optional<Account> currAccData = accountService.findById(id);
+		Account account = currAccData.get();
+		Set<Discretionary> accDiscretionary = new LinkedHashSet<>();
+		accDiscretionary = account.getDiscretionaryItems();
+		model.addAttribute("wishlistItems", accDiscretionary);
+		
+		// create discretionary object for form 
+		Discretionary newWishlist = new Discretionary();
+		model.addAttribute("newWishlist", newWishlist);
+		
+		// retrieving current balance 
+		BigDecimal expenseTotal = expenseService.getSumOfAccountExpenses(id);
+		BigDecimal incomeTotal = incomeService.getSumOfAccountIncome(id);
+		BigDecimal balance;
+		try{
+			balance = incomeTotal.subtract(expenseTotal);
+		} catch(NullPointerException npe) {
+			balance = null;
+		}
+		model.addAttribute("balance", balance);
 		
 		return "wishlist";
 	}
 	
+	@PostMapping("/wishlist/{accId}")
+	public String createDiscretionary(@PathVariable("accId") String id, 
+			@RequestParam("name") String name,
+			@RequestParam("description") String desc,
+			@RequestParam("amount") BigDecimal amount,
+			@ModelAttribute("user") User user,
+			Model model) {
+		log.info("made it to the controller");
+		model.addAttribute("id", id);
+		Discretionary newWishlist = new Discretionary(name,amount, desc);
+		discretionaryService.saveNewDiscretionary(newWishlist, user, id);
+		return "redirect:/accounts/wishlist/" + id;
+	}
+	
+	// delete 
+	@GetMapping("/wishlist/{id}/delete/{wId}")
+	public String deleteWishlist(@PathVariable("id") String accId, @PathVariable("wId") Long wishlistId, Model model) {
+		log.info(accId);
+		discretionaryService.deleteDiscretionary(wishlistId);
+		model.addAttribute("id", accId);
+		return "redirect:/accounts/wishlist/" + accId;
+	}
 }

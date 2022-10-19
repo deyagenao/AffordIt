@@ -16,9 +16,15 @@
     
     <ul id="user-nav-list">
       <li class="nav-list-item selected-view"><a th:href="@{/home/}"><i class="fa-solid fa-house-user"></i> Home</a></li>
-      <li class="nav-list-item"><a th:href="@{/accounts/expenses/{id}(id=${currentAccount?.id})}"><i class="fa-solid fa-receipt"></i> Expenses</a></li>
-      <li class="nav-list-item"><a th:href="@{/accounts/incomes/{id}(id=${currentAccount?.id})}"><i class="fa-solid fa-sack-dollar"></i> Income</a></li>
-      <li class="nav-list-item"><a th:href="@{/accounts/wishlist/{id}(id=${currentAccount?.id}}"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+      <li th:if="${currentAccount != null}" class="nav-list-item">
+      	<a th:href="@{/accounts/expenses/{id}(id=${currentAccount?.id})}"><i class="fa-solid fa-receipt"></i> Expenses</a>
+      </li>
+      <li th:if="${currentAccount != null}" class="nav-list-item">
+      	<a th:href="@{/accounts/incomes/{id}(id=${currentAccount?.id})}"><i class="fa-solid fa-sack-dollar"></i> Income</a>
+      </li>
+      <li th:if="${currentAccount != null}" class="nav-list-item">
+      	<a th:href="@{/accounts/wishlist/{id}(id=${currentAccount?.id})}"><i class="fa-solid fa-heart"></i> Wishlist</a>
+      </li>
       <li class="nav-list-item"><a th:href="@{/settings/}"><i class="fa-solid fa-gear"></i> User Settings</a></li>
       <li class="nav-list-item"><a th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
     </ul>
@@ -73,11 +79,25 @@
          th:text="${currentAccount?.id}"></span></p>
         <button class="btn" id="toggle-acc-no">Show</button>
         <div id="account-summary">
-          <h3>Monthly Expenses: <span id="monthly-ex-sum">$2,750.55</span></h3>
-          <h3>Monthly Income: <span id="monthly-in-sum">$3,250.45</span></h3>
-          <h3 class="sum-message surplus">Way to go! You are earning <span id="amount">$499.90</span> more than you spend each month.</h3>
-          <h3 class="sum-message deficit" hidden=>Uh oh. You are spending <span id="amount">$499.90</span> more than you earn each month.</h3>
-          <div class="btn"><a th:href="@{/expense}">Update Your Budget</a></div>
+          <h3>
+          	Monthly Expenses: $
+          	<span id="monthly-ex-sum" th:if="${expenseTotal != null}" th:text="${expenseTotal}"></span>
+          	<span id="monthly-ex-sum" th:unless="${expenseTotal != null}">0.00</span>
+          </h3>
+          <h3>
+          	Monthly Income: $
+          	<span id="monthly-in-sum" th:if="${incomeTotal != null}" th:text="${incomeTotal}"></span>
+          	<span id="monthly-in-sum" th:unless="${incomeTotal != null}">0.00</span>
+          </h3>
+          <div th:if="${balance != null}">
+          	<h3 th:if="${balance > 0}" class="sum-message">
+          		Way to go! You are earning <span class="success" th:text="|$${balance}|"></span> more than you spend each month.
+          	</h3>
+          	<h3 th:unless="${balance > 0}"class="sum-message">
+          		Uh oh. You are spending <span class="alert" id="amount" th:text="|$${balance}|"></span> more than you earn each month.
+          	</h3>
+          </div>
+           <div class="btn"><a th:href="@{/accounts/expenses/{id}(id=${currentAccount?.id})}">Update Your Budget</a></div>
         </div>
       </div>
     </div>

@@ -48,12 +48,8 @@ public class AccountService {
 	// update and delete should be handled by Spring REST, or may need to 
 	// add a method from the account side
 	
-	
-//	income related 
-	public Set<Income> findIncomesOfAccountById(String id) {
-		return incomeRepository.findIncomesByAccountId(id);
-	}
-	// add new expense 
+
+	// add new income 
 	public Income addNewIncome(String id, Income income) {
 		Optional<Account> accData = accountRepository.findById(id);
 		Account acc = accData.get();

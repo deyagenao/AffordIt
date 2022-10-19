@@ -1,5 +1,6 @@
 package com.deyaniragenao.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,11 @@ import com.deyaniragenao.repository.AccountRepository;
 import com.deyaniragenao.repository.CategoryRepository;
 import com.deyaniragenao.repository.ExpenseRepository;
 
+/**
+ * ExpenseService is a service class that implements customized methods for interacting with expense-related data. 
+ * @author deyaniragenao
+ *
+ */
 @Service
 public class ExpenseService {
 
@@ -26,7 +32,12 @@ public class ExpenseService {
 	@Autowired 
 	AccountRepository accountRepository;
 	
-	
+	/**
+	 * Accepts a newExpense with a data type of FinEntryDto. This data is then set to a valid Expense object and persisted to the database.
+	 * @param newExpense
+	 * @param accId
+	 * @param user
+	 */
 	public void saveNewExpense(FinEntryDto newExpense, String accId, User user) {
 		Expense expense = new Expense();
 		expense.setName(newExpense.getName());
@@ -58,10 +69,27 @@ public class ExpenseService {
 		expenseRepository.save(expense);
 	}
 	
+	/**
+	 * Deletes an expense record with the id passed as an argument
+	 * @param id
+	 */
 	public void deleteExpense(Long id) {
 		expenseRepository.deleteById(id);
 	}
 	
+	/**
+	 * Returns the sum of the monthly amount for all expenses for a given account 
+	 * @param id
+	 * @return sum
+	 */
+	public BigDecimal getSumOfAccountExpenses(String id) {
+		return expenseRepository.findExpenseTotalByAccountId(id);
+	}
+	
+	/**
+	 * Returns a list of all categories with a type of expense 
+	 * @return List<Category>
+	 */
 	public List<Category> getExpenseCategories(){
 		return categoryRepository.findCategoriesByType("expense");
 	}

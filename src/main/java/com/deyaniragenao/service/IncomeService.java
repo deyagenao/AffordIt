@@ -1,5 +1,6 @@
 package com.deyaniragenao.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,11 @@ import com.deyaniragenao.repository.AccountRepository;
 import com.deyaniragenao.repository.CategoryRepository;
 import com.deyaniragenao.repository.IncomeRepository;
 
+/**
+ * IncomeService is a service class that implements customized methods and business logic for interacting with income-related data. 
+ * @author deyaniragenao
+ *
+ */
 @Service
 public class IncomeService {
 
@@ -26,6 +32,12 @@ public class IncomeService {
 	@Autowired 
 	AccountRepository accountRepository;
 	
+	/**
+	 * Accepts a newIncome with a data type of FinEntryDto. This data is then mapped to a valid Income object and persisted to the database.
+	 * @param newIncome
+	 * @param accId
+	 * @param user
+	 */
 	public void saveNewIncome(FinEntryDto newIncome, String accId, User user) {
 		Income income = new Income();
 		income.setName(newIncome.getName());
@@ -57,10 +69,27 @@ public class IncomeService {
 		incomeRepository.save(income);
 	}
 	
+	/**
+	 * Deletes the income record with the given id 
+	 * @param id
+	 */
 	public void deleteIncome(Long id) {
 		incomeRepository.deleteById(id);
 	}
 	
+	/**
+	 * Returns the sum of the monthly amount for all income for a given account 
+	 * @param id
+	 * @return sum
+	 */
+	public BigDecimal getSumOfAccountIncome(String id) {
+		return incomeRepository.findIncomeTotalByAccountId(id);
+	}
+	
+	/**
+	 * Returns a list of all records from the Categories table with a type of income 
+	 * @return List<Category>
+	 */
 	public List<Category> getIncomeCategories(){
 		return categoryRepository.findCategoriesByType("income");
 	}
