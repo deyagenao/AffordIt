@@ -96,12 +96,13 @@ public class AccountController {
 		return "expense";
 	}
 	
+	// add exception handling -- incorrect data values throws BindException 
 	@PostMapping("/expenses/{id}")
 	public String createExpense(@Valid @ModelAttribute("newExpense") FinEntryDto newExpense, 
-			@PathVariable("id") String accId, BindingResult result, Model model) {
+			 BindingResult result, @PathVariable("id") String accId, Model model) {
 		if(result.hasErrors()) {
-			model.addAttribute("newExpense", newExpense);
-			return "/accounts/expenses/" + accId;
+			model.addAttribute("newExpense", new FinEntryDto());
+			return "redirect:/accounts/expenses/" + accId + "?error";
 		}
 		log.info(newExpense.getCategoryId().toString());
 		log.info(accId);
@@ -149,10 +150,10 @@ public class AccountController {
 	
 	@PostMapping("/incomes/{id}")
 	public String createIncome(@Valid @ModelAttribute("newIncome") FinEntryDto newIncome, 
-			@PathVariable("id") String accId, BindingResult result, Model model) {
+			 BindingResult result, @PathVariable("id") String accId, Model model) {
 		if(result.hasErrors()) {
-			model.addAttribute("newIncome", newIncome);
-			return "/accounts/incomes/" + accId;
+			model.addAttribute("newIncome", new FinEntryDto());
+			return "redirect:/accounts/incomes/" + accId + "?error";
 		}
 		log.info(newIncome.getCategoryId().toString());
 		log.info(accId);

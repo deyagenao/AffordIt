@@ -2,6 +2,7 @@ package com.deyaniragenao.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -21,9 +22,11 @@ public class FinEntryDto {
 	
 	@NotEmpty(message = "Please enter a name to reference your entry.")
 	String name;
-	@NotNull(message = "Please enter an amount.")
+	@NotNull(message = "Please enter a valid amount.")
+	@Digits(fraction = 2, integer = 10)
 	BigDecimal amount;
 	@NotNull(message = "Please choose a category.")
+	@Digits(fraction = 0, integer = 2)
 	Integer categoryId;
 	@NotEmpty
 	String frequency;

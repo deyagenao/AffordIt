@@ -1,6 +1,7 @@
 package com.deyaniragenao.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -46,7 +47,7 @@ public abstract class FinancialEntry {
 			case MONTHLY: 
 				break;
 			case ANNUALLY:
-				monthlyAmount = monthlyAmount.divide(new BigDecimal("12"));
+				monthlyAmount = monthlyAmount.divide(new BigDecimal("12"), 2, RoundingMode.HALF_UP);
 		}
 		
 		return monthlyAmount;

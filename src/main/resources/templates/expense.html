@@ -49,14 +49,15 @@
     </div>
     <div class="add-expense">
       <p>Add New Expense</p>
-      <form th:action="@{/accounts/expenses/{id}(id=${id})}" method="post" class="fin-form" id="add-expense-form" 
+      <form th:action="@{/accounts/expenses/{id}(id=${id})}" role="form" method="post" class="fin-form" id="add-expense-form" 
       	th:object="${newExpense}">
-        <input type="text" class="form-input horizontal-form" name="name" placeholder="Expense Name">
-        <select class="form-select form-input horizontal-form" name="categoryId" id="expense-category">
+      	<div th:if="${param.error}">Expense was not added to the budget. Please make sure to enter a name and a valid amount (no dollar sign). </div>
+        <input type="text" class="form-input horizontal-form" name="name" th:field="*{name}" placeholder="Expense Name">
+        <select class="form-select form-input horizontal-form" name="categoryId" th:field="*{categoryId}" id="expense-category">
           <option th:each="category: ${exCategories}" th:text="${category.name}" th:value="${category.id}"></option>
         </select>
-        <input type="text" class="form-input horizontal-form" name="amount" placeholder="Expense Amount">
-        <select class="form-input form-select horizontal-form" name="frequency" id="expense-frequency">
+        <input type="text" class="form-input horizontal-form" name="amount" th:field="*{amount}" placeholder="Expense Amount">
+        <select class="form-input form-select horizontal-form" name="frequency" th:field="*{frequency}" id="expense-frequency">
           <option value="weekly">Weekly</option>
           <option value="biweekly">Biweekly</option>
           <option value="monthly" selected>Monthly</option>

@@ -51,12 +51,13 @@
       <p>Add New Income</p>
       <form th:action="@{/accounts/incomes/{id}(id=${id})}" method="post" class="fin-form" id="add-income-form"
       	th:object="${newIncome}">
-        <input type="text" class="form-input horizontal-form" name="name" placeholder="Income Name">
-        <select class="form-select form-input horizontal-form" name="categoryId" id="income-category">
+        <div th:if="${param.error}">Income was not added to the budget. Please make sure to enter a name and a valid amount (no dollar sign). </div>
+        <input type="text" class="form-input horizontal-form" name="name" th:field="*{name}" placeholder="Income Name">
+        <select class="form-select form-input horizontal-form" name="categoryId" th:field="*{categoryId}" id="income-category">
           <option th:each="category: ${inCategories}" th:text="${category.name}" th:value="${category.id}"></option>
         </select>
-        <input type="text" class="form-input horizontal-form" name="amount" placeholder="Income Amount">
-        <select class="form-input form-select horizontal-form" name="frequency" id="income-frequency">
+        <input type="text" class="form-input horizontal-form" name="amount" th:field="*{amount}" placeholder="Income Amount">
+        <select class="form-input form-select horizontal-form" name="frequency" th:field="*{frequency}" id="income-frequency">
           <option value="weekly">Weekly</option>
           <option value="biweekly">Biweekly</option>
           <option value="monthly" selected>Monthly</option>

@@ -1,0 +1,20 @@
+INSERT INTO categories (name, type) 
+VALUES
+	('Rent/Mortgage', 'expense'),
+	('Utilities', 'expense'),
+	('Insurance', 'expense'),
+	('Groceries', 'expense'),
+	('Debt Payments', 'expense'),
+	('Savings/ Investments', 'expense'),
+	('Health/ Medical', 'expense'),
+	('Personal', 'expense'),
+	('Child Needs', 'expense'),
+	('Pet Care', 'expense'),
+	('Other', 'expense'),
+	('After-Tax Pay', 'income'),
+	('Self-Employment Income', 'income'),
+	('Bonuses/ Overtime', 'income'),
+	('Benefit Payments', 'income'),
+	('Savings/ Investments', 'income'),
+	('Tax Credit', 'income'),
+	('Other', 'income');
