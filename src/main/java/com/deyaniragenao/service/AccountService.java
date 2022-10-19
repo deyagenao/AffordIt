@@ -2,7 +2,6 @@ package com.deyaniragenao.service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,12 @@ import com.deyaniragenao.repository.DiscretionaryRepository;
 import com.deyaniragenao.repository.ExpenseRepository;
 import com.deyaniragenao.repository.IncomeRepository;
 
+/**
+ * /**
+ * AccountService is a service class the logic for interacting with account data. 
+ * @author deyaniragenao
+ *
+ */
 @Service
 public class AccountService {
 	
@@ -41,10 +46,11 @@ public class AccountService {
 		
 		return expense;
 	}
-	// show expense total 
-	public BigDecimal getExpenseTotal(String id) {
-		return expenseRepository.findExpenseTotalByAccountId(id);
-	}
+	
+//	// show expense total 
+//	public BigDecimal getExpenseTotal(String id) {
+//		return expenseRepository.findExpenseTotalByAccountId(id);
+//	}
 	// update and delete should be handled by Spring REST, or may need to 
 	// add a method from the account side
 	
@@ -62,8 +68,6 @@ public class AccountService {
 	public BigDecimal getIncomeTotal(String id) {
 		return incomeRepository.findIncomeTotalByAccountId(id);
 	}
-	
-//	discretionary related
 	
 	
 	@Autowired

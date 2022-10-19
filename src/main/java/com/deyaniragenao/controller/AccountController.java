@@ -221,4 +221,5 @@ public class AccountController {
 		model.addAttribute("id", accId);
 		return "redirect:/accounts/wishlist/" + accId;
 	}
+	
 }
