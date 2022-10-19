@@ -29,7 +29,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = {"accountUsers", "expenses", "incomes", "discretionaryItems"})
 public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;

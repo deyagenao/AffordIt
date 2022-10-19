@@ -33,8 +33,10 @@ public class Discretionary implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
+	@Column(nullable = false)
+	private String name;
 	@Column(nullable = false)
 	BigDecimal amount;
 	String description;
@@ -51,7 +53,7 @@ public class Discretionary implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Discretionary [id=" + id + ", amount=" + amount + ", description=" + description + ", date=" + dateCreated
+		return "Discretionary [id=" + id + ", name=" + name +", amount=" + amount + ", description=" + description + ", date=" + dateCreated
 				+ "]";
 	}
 	

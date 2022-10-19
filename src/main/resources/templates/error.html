@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Afford It | Error</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/authforms.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/authforms.css">
 </head>
 <body>
   <header id="header">
@@ -17,8 +17,9 @@
   </header>
   <main id="error">
     <h3 id="page-error">The page you requested can not be found. You may need to be logged in to view this page.</h3>
-    <div class="btn go-home"><a th:href="@{/}">Return to Home</a></div>
-    <img src="img/page_not_found.svg" alt="404 Page not found">
+    <div class="btn go-home"><a th:href="@{/}">Return to Main</a></div>
+    <div class="btn go-home"><a th:href="@{/signin}">Sign In</a></div>
+    <img src="/img/page_not_found.svg" alt="404 Page not found">
     
   </main>
   <footer id="form-footer">

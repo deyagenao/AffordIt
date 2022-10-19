@@ -2,6 +2,7 @@ package com.deyaniragenao.model;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,7 +31,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"accounts"})
+@EqualsAndHashCode(exclude = {"accounts", "expenses", "incomes", "discretionaryItems"})
 public class User {
 
 	@Id
@@ -56,7 +57,7 @@ public class User {
 			name = "users_accounts",
 			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "account_id"))
-	Set<Account> accounts = new HashSet<>();
+	Set<Account> accounts = new LinkedHashSet<>();
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	Set<Expense> expenses = new HashSet<>();

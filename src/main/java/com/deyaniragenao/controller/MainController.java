@@ -9,14 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.deyaniragenao.dto.UserDto;
 import com.deyaniragenao.model.User;
 import com.deyaniragenao.service.UserService;
 
 @Controller
-@SessionAttributes("user")
 public class MainController {
 	
 	@Autowired
@@ -31,13 +29,6 @@ public class MainController {
 	public String getSignIn() {
 		return "signin";
 	}
-	
-	// might not be necessary due to spring security
-//	@PostMapping("/signin")
-//	public String signIn() {
-//		
-//		return "redirect:/userhome";
-//	}
 	
 	@GetMapping("/signup")
 	public String getSignUp(Model model) {
@@ -60,8 +51,5 @@ public class MainController {
 		return "redirect:/signin?success";
 	}
 	
-	@GetMapping("/home")
-	public String getUserHome() {
-		return "userhome";
-	}
+	
 }

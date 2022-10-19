@@ -34,8 +34,6 @@ public class UserService {
 		// need to add password encoder in this step 
 		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 		
-		// when implementing spring security, add the roles to determine authorization
-		
 		userRepository.save(user);
 	}
 	

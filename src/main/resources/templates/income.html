@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afford It | Income</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/userviews.css">
+</head>
+<body>
+  <!-- side navigation -->
+  <nav id="user-nav">
+    <div id="nav-logo"><a href="index.html"><i class="fa-solid fa-hand-holding-dollar"></i>  Afford It </a></div>
+    
+    <ul id="user-nav-list">
+      <li class="nav-list-item"><a th:href="@{/home/}"><i class="fa-solid fa-house-user"></i> Home</a></li>
+      <li class="nav-list-item"><a th:href="@{/accounts/expenses/{id}(id=${id})}"><i class="fa-solid fa-receipt"></i> Expenses</a></li>
+      <li class="nav-list-item  selected-view"><a th:href="@{/accounts/incomes/{id}(id=${id})}"><i class="fa-solid fa-sack-dollar"></i> Income</a></li>
+      <li class="nav-list-item"><a th:href="@{/accounts/wishlist/{id}(id=${id})}"><i class="fa-solid fa-heart"></i> Wishlist</a></li>
+      <li class="nav-list-item"><a th:href="@{/settings/}"><i class="fa-solid fa-gear"></i> User Settings</a></li>
+      <li class="nav-list-item"><a th:href="@{/logout}"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a></li>
+    </ul>
+  </nav>
+  <main class="main-user-content">
+    <h1 class="user-content-title">Income</h1>
+    <h2 class="user-content-subtitle" id="month-year"><i class="fa-solid fa-arrow-right"></i> October 2022 Total: $3,250.45</h2>
+    <div class="income-table-container">
+      <h4>Account Income</h4>
+      <table class="fin-table" id="income-table">
+        <tr th:each="income: ${incomes}">
+      		<td class="fin-name" th:text="${income.name}"></td>
+        	<td class="fin-category" th:text="${income.category.name}"></td>
+          	<td class="fin-amount" th:text="${income.amount}"></td>
+          	<td class="fin-frequency" th:text="${income.frequency}"></td>
+          	<td class="edit-fin">
+            	<div class="btn"><a th:href="@{/incomes/update/{id}(id=${income.id})}"></a><i class="fa-solid fa-pen-to-square"></i></div>
+         	 </td>
+          	<td class="delete-fin">
+           		<div class="btn"><a th:href="@{/accounts/incomes/{id}/delete/{inId}(id = ${id}, inId=${income.id})}"><i class="fa-solid fa-trash"></i></a></div>
+          	</td>
+      	</tr>
+        <tr>
+          <td class="fin-name">Pay</td>
+          <td class="fin-category">After-Tax Pay</td>
+          <td class="fin-amount">1000.00</td>
+          <td class="fin-frequency">Biweekly</td>
+          <td class="edit-fin">
+            <div class="btn"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></div>
+          </td>
+          <td class="delete-fin">
+            <div class="btn"><a href=""><i class="fa-solid fa-trash"></i></a></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="fin-name">Property Rent Income</td>
+          <td class="fin-category">Savings/ Investments</td>
+          <td class="fin-amount">1200.00</td>
+          <td class="fin-frequency">Monthly</td>
+          <td class="edit-fin">
+            <div class="btn"><a href=""></a><i class="fa-solid fa-pen-to-square"></i></div>
+          </td>
+          <td class="delete-fin">
+            <div class="btn"><a href=""><i class="fa-solid fa-trash"></i></a></div>
+          </td>
+        </tr>
+        
+      </table>
+    </div>
+    <div class="add-income">
+      <p>Add New Income</p>
+      <form th:action="@{/accounts/incomes/{id}(id=${id})}" method="post" class="fin-form" id="add-income-form"
+      	th:object="${newIncome}">
+        <input type="text" class="form-input horizontal-form" name="name" placeholder="Income Name">
+        <select class="form-select form-input horizontal-form" name="categoryId" id="income-category">
+          <option th:each="category: ${inCategories}" th:text="${category.name}" th:value="${category.id}"></option>
+        </select>
+        <input type="text" class="form-input horizontal-form" name="amount" placeholder="Income Amount">
+        <select class="form-input form-select horizontal-form" name="frequency" id="income-frequency">
+          <option value="weekly">Weekly</option>
+          <option value="biweekly">Biweekly</option>
+          <option value="monthly" selected>Monthly</option>
+          <option value="annually">Annually</option>
+        </select>
+        <button type="submit" class="btn">Save</button>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

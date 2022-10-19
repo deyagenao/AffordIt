@@ -11,18 +11,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @MappedSuperclass
+@Getter
+@Setter
 public abstract class FinancialEntry {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false)
+	private String name;
 	@Column(nullable = false)
 	private BigDecimal amount;
 	@Column(nullable = false)
 	private BigDecimal monthlyAmount;
-	@Column(name = "description")
-	private String description;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private FinancialEntryFrequency frequency;
@@ -46,9 +51,10 @@ public abstract class FinancialEntry {
 		
 		return monthlyAmount;
 	}
+	
 	@Override
 	public String toString() {
-		return this.getClass().getName() + " [id=" + id + ", amount=" + amount + ", monthlyAmount=" + monthlyAmount + ", description=" + description + ", frequency="
+		return this.getClass().getName() + " [id=" + id + ", name=" + name + ", amount=" + amount + ", monthlyAmount=" + monthlyAmount + ", frequency="
 				+ frequency + ", date=" + date + "]";
 	}
 	

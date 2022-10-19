@@ -26,10 +26,11 @@ public class AccountService {
 	@Autowired
 	DiscretionaryRepository disRepository;
 	
-//	expense related 
-	public Set<Expense> findExpensesOfAccountById(String id) {
-		return expenseRepository.findExpensesByAccountId(id);
+	// account
+	public Optional<Account> findById(String id) {
+		return accountRepository.findById(id);
 	}
+	
 	// add new expense 
 	public Expense addNewExpense(String id, Expense expense) {
 		Optional<Account> accData = accountRepository.findById(id);

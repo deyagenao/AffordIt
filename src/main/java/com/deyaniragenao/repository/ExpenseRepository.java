@@ -12,8 +12,8 @@ import com.deyaniragenao.model.Expense;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long>{
 
-	@Query("SELECT e FROM Expense e WHERE e.account.id =?1")
-	Set<Expense> findExpensesByAccountId(String id);
+//	@Query("SELECT e FROM Expense e WHERE e.account.id =?1")
+//	Set<Expense> findExpensesByAccountId(String id);
 
 	@Query("SELECT SUM(e.monthlyAmount) FROM Expense e "
 			+ "GROUP BY e.account "

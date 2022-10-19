@@ -34,7 +34,7 @@ body{
   margin: 0;
   padding: 15px 0px;
   padding-left: 30px;
-  width: 220px;
+  width: 100%;
 }
 
 .nav-list-item:hover{
@@ -150,4 +150,52 @@ body{
 
 #select-acc-btn {
   display: inline
+}
+
+
+#acc-display, #toggle-acc-no {
+  display: inline;
+}
+
+#toggle-acc-no {
+  font-family: var(--text-font);
+  font-size: 0.75em;
+  padding: 5px 10px;
+}
+
+/* Financial Entry Forms */
+.horizontal-form {
+  display: inline;
+  width: 20%;
+}
+.form-select {
+  padding: 10px;
+  height: 46px;
+}
+
+/* Financial Entry Tables */
+h4{
+  font-size: 1.25em;
+  margin-top: 15px;
+}
+.fin-table {
+  width: 90%;
+  margin-bottom: 30px;
+  border-collapse: collapse;
+}
+.fin-table tr{
+  margin-bottom: 20px;
+  border-bottom: var(--border);
+}
+.fin-table td{
+  padding: 10px;
+}
+.edit-fin .btn, .delete-fin .btn{
+  padding: 10px;
+  display: inline;
+  margin-top: 5px;
+}
+
+#wishlist-description { 
+  width: 40%;
 }

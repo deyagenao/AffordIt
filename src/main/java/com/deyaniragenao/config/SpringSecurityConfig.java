@@ -26,7 +26,7 @@ public class SpringSecurityConfig {
 					.and()
 					.formLogin(form -> form.loginPage("/signin")
 											.loginProcessingUrl("/signin")
-											.defaultSuccessUrl("/home")
+											.defaultSuccessUrl("/home/")
 											.permitAll()
 					).logout(logout -> logout
 										.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
