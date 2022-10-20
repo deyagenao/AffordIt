@@ -18,3 +18,4 @@ In your browser, navigate to [http://localhost:8080](). From there, you can expl
 For additional information about the project and the process of creating the project, check out the links below. 
 - [Case Study Design Phase](https://docs.google.com/document/d/1GcJFkCrMjT7xFeuuxqZa2kkPZgUifr6kZOnzYe0FGj4/edit?usp=sharing)
 - [Entity Relationship Diagrams](https://drive.google.com/file/d/1hMc9A3fx7-q2AfXpHA9kacd2ix3zmIUL/view?usp=sharing)
+- [Case Study Presentation](https://docs.google.com/presentation/d/12OIPA8mJzrbO38pd7vyneJQwk2GMgY9h6weKZxdNgZY/edit?usp=sharing)

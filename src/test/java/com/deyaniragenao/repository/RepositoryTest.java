@@ -36,7 +36,7 @@ public class RepositoryTest {
 	@Autowired
 	IncomeRepository incomeRepository;
 	
-	private User user = new User("Andrea", "Herrera", "an@he.com", "1234");
+	private User user = new User("Andrea", "Herrera", "andrea@herrera.com", "1234");
 	private Account account = new Account("Main Account");
 	private Category categoryE = new Category("Rent", "expense");
 	private Category categoryI = new Category("Pay", "income");
