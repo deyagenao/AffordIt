@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * AccountDto is Data Transfer Object class. Used for validating the creation of a new account 
+ * from the user account form. 
+ * @author deyaniragenao
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

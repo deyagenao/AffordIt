@@ -21,6 +21,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Discretionary is the model class for creating the discretionary items table and discretionary objects 
+ * @author deyaniragenao
+ *
+ */
 @Entity
 @Table(name = "discretionary_items")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -51,6 +56,12 @@ public class Discretionary implements Serializable {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
+	/**
+	 * Discretionary constructor with name, amount and description parameters 
+	 * @param name
+	 * @param amount
+	 * @param description
+	 */
 	public Discretionary(String name, BigDecimal amount, String description) {
 		this.name = name;
 		this.amount = amount;

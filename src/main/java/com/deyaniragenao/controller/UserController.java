@@ -71,6 +71,14 @@ public class UserController {
 		return authentication.getName();
 	}
 	
+	/**
+	 * Returns the user home view. Uses the current user and determines if the user has accounts. 
+	 * If so, retrieves summary information regarding the accounts' expenses and income. 
+	 * @param model
+	 * @param user
+	 * @return user_home view
+	 * @throws NullPointerException
+	 */
 	@GetMapping("/")
 	public String getUserHome(Model model, @ModelAttribute("user") User user) throws NullPointerException {
 		Set<Account> userAccounts = new LinkedHashSet<>();
@@ -96,20 +104,33 @@ public class UserController {
 			model.addAttribute("balance", balance);
 			log.info(currAcc.getName());
 		}
-		return "userhome";
+		return "user_home";
 	}
 	
-	
-
+	/**
+	 * Get mapping that returns the add account form to the user home page. 
+	 * Adds a new AccountDto object to the model for the form. 
+	 * @param user
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/addAccount")
 	public String getAddAccountForm(@ModelAttribute User user, Model model) {
 		AccountDto accDto = new AccountDto();
 		model.addAttribute(user);
 		model.addAttribute("account", accDto);
 		model.addAttribute("accStatus", "addAccount");
-		return "userhome";
+		return "user_home";
 	}
 	
+	/**
+	 * Post mapping for adding a pre-existing account to a User. Accepts the account number as a request 
+	 * parameter. Uses the account number to retrieve the account record and update the User. 
+	 * @param user
+	 * @param accNo
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/addAccount")
 	public String addAccount(@ModelAttribute User user, @RequestParam("accountNo") String accNo, Model model) {
 		Optional<Account> accountData = accountService.findById(accNo);
@@ -123,8 +144,19 @@ public class UserController {
 		return "redirect:/home/";
 	}
 	
+	/**
+	 * Post Mapping that handles the creation of a new account. If there are any errors, user is 
+	 * redirected to the form component. Otherwise the user is updated with the new account. 
+	 * Redirects users to the home page. 
+	 * @param user
+	 * @param accInfo
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/createNewAccount")
-	public String createNewAccount(@ModelAttribute User user, @Valid @ModelAttribute("account") AccountDto accInfo, BindingResult result, Model model) {
+	public String createNewAccount(@ModelAttribute User user, 
+			@Valid @ModelAttribute("account") AccountDto accInfo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("account", accInfo);
 			return "redirect:/home/addAccount?accError";

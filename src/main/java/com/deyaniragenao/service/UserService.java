@@ -13,7 +13,8 @@ import com.deyaniragenao.repository.AccountRepository;
 import com.deyaniragenao.repository.UserRepository;
 
 /**
- * 
+ * User service class handles the business logic for creating, reading, updating and persisting 
+ * user objects. 
  * @author deyaniragenao
  *
  */
@@ -27,6 +28,11 @@ public class UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	/**
+	 * Method accepts a UserDto object. Creates a new user object and sets its values with the userDto 
+	 * values. Password is encoded before the user object is persisted to the database. 
+	 * @param userDto
+	 */
 	public void saveNewUser(UserDto userDto) {
 		User user = new User();
 		user.setFirstName(userDto.getFirstName());
@@ -37,11 +43,23 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	/**
+	 * Method accepts a string representing a user email address. Returns the user object with the 
+	 * matching email address
+	 * @param email
+	 * @return user
+	 */
 	public User findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 	
-	// Account
+	/**
+	 * Method retrieves the user from the database using user id, then adds an account to the user's
+	 * set of accounts. Then updates the user in the database. 
+	 * @param id
+	 * @param acc
+	 * @return
+	 */
 	public User addNewAccount(String id, Account acc) {
 		Optional<User> userData = userRepository.findById(id);
 		User user = userData.get();

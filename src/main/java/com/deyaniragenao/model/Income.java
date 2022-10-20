@@ -13,6 +13,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Income class is a model class that is used to create the incomes table and income objects.
+ * Extends the abstract class FinancialEntry. 
+ * @author deyaniragenao
+ *
+ */
 @Entity
 @Table(name = "incomes")
 @NoArgsConstructor

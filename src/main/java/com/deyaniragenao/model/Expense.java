@@ -13,6 +13,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Expense class is a model class that is used to create the expenses table and expense objects.
+ * Extends the abstract class FinancialEntry. 
+ * @author deyaniragenao
+ *
+ */
 @Entity
 @Table(name = "expenses")
 @NoArgsConstructor

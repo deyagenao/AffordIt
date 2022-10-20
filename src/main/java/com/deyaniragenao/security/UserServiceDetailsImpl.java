@@ -12,12 +12,25 @@ import org.springframework.stereotype.Service;
 import com.deyaniragenao.model.User;
 import com.deyaniragenao.service.UserService;
 
+/**
+ * Class implements Spring Security's UserDetailsService.
+ * @author deyaniragenao
+ *
+ */
 @Service
 public class UserServiceDetailsImpl implements UserDetailsService {
 
 	@Autowired
 	UserService userService;
 	
+	/**
+	 * Method handles user authentication by validating user email and password, 
+	 * checking against database, and returning UserDetails if valid.
+	 * Throws UsernameNotFoundException if no record with the user email is found. 
+	 * @param email
+	 * @return UserDetails
+	 * @throws UsernameNotFoundException
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		System.out.println(email);

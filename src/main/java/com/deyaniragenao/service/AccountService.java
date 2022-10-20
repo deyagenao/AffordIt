@@ -19,6 +19,10 @@ public class AccountService {
 	
 	AccountRepository accountRepository; 
 	
+	/**
+	 * Accepts a string id and then returns the account with the corresponding id
+	 * @return Optional<Account>
+	 */
 	public Optional<Account> findById(String id) {
 		return accountRepository.findById(id);
 	}

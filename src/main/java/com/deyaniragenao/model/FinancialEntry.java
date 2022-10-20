@@ -15,6 +15,13 @@ import javax.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * An abstract class that is also a MappedSuperclass. There is no corresponding table in the database. 
+ * Instead, this class is a super class for financial entry objects- specificially expense and income
+ * objects.  
+ * @author deyaniragenao
+ *
+ */
 @MappedSuperclass
 @Getter
 @Setter
@@ -35,6 +42,10 @@ public abstract class FinancialEntry {
 	@Column(nullable = false)
 	LocalDateTime date = LocalDateTime.now();
 	
+	/**
+	 * Uses the specified amount and financial frequency to calculate the monnthly amount 
+	 * @return monthlyAmount
+	 */
 	public BigDecimal calculateMonthlyAmount() {
 		BigDecimal monthlyAmount = this.amount;
 		switch(this.frequency) {
@@ -53,6 +64,10 @@ public abstract class FinancialEntry {
 		return monthlyAmount;
 	}
 	
+	/**
+	 * To string method that uses the class name of the object that calls the method. 
+	 * @return string
+	 */
 	@Override
 	public String toString() {
 		return this.getClass().getName() + " [id=" + id + ", name=" + name + ", amount=" + amount + ", monthlyAmount=" + monthlyAmount + ", frequency="

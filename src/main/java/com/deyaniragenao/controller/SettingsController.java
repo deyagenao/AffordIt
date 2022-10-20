@@ -6,11 +6,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * Settings Controller is in progress. Handles request to the settings endpoints. 
+ * @author deyaniragenao
+ *
+ */
 @Controller
 @RequestMapping("/settings")
 public class SettingsController {
 
-	// settings view 
+	/**
+	 * Get the Settings page for the account specified by the id in the url path.
+	 * @param accId
+	 * @param model
+	 * @return settings view
+	 */
 	@GetMapping("/{id}")
 	public String getSettingsPage(@PathVariable("id") String accId, Model model) {
 		model.addAttribute("id", accId);

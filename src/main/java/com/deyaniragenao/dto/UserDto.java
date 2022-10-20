@@ -10,6 +10,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * User Data Transfer Object class used for validating the creation of a new user. 
+ * @author deyaniragenao
+ *
+ */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,7 +38,7 @@ import com.deyaniragenao.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * Account Controller handles requests and responses for all routes connected to the account. All paths are dependent 
+ * Account Controller handles requests and responses for all routes connected to the current account. All paths are dependent 
  * on the current user account, and contain the user account number as a path variable. 
  * @author deyaniragenao
  *
@@ -58,6 +59,11 @@ public class AccountController {
 	@Autowired
 	DiscretionaryService discretionaryService;
 	
+	/**
+	 * Retrieves the current principal from the Spring Security session and returns the user as a model attribute 
+	 * to be used by other methods
+	 * @return user
+	 */
 	@ModelAttribute("user")
 	public User getSessionUser() {
 		String userEmail = getSessionUserEmail();
@@ -65,13 +71,24 @@ public class AccountController {
 		return user;
 	}
 	
-	// helper method for retrieving current session user email 
+	/**
+	 * Helper method for retrieving current user email from the Spring Security Session 
+	 * @return email
+	 */ 
 	public String getSessionUserEmail() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		return authentication.getName();
 	}
 	
-	// Account Expenses 
+	
+	/**
+	 * Returns the account's expenses page. Accepts the account id as a path variable and the model. Adds the current account, 
+	 * current expenses, expenses total, and expense categories to the model. Also creates a new FinEntryDto for the 'add expense'
+	 * form on the page.  
+	 * @param id
+	 * @param model
+	 * @return expense view 
+	 */
 	@GetMapping("/expenses/{id}")
 	public String getAccountExpensesPage(@PathVariable String id, Model model) {
 		model.addAttribute("id", id);
@@ -96,10 +113,20 @@ public class AccountController {
 		return "expense";
 	}
 	
-	// add exception handling -- incorrect data values throws BindException 
+	/**
+	 * PostMapping for adding a new expense to the account. If there are any errors in the request, BindException is thrown.
+	 * Exception is handled by checking if the BindingResult has errors and redirecting the user back to the page with a url
+	 * error parameter
+	 * @param newExpense
+	 * @param result
+	 * @param accId
+	 * @param model
+	 * @return expenses url
+	 * @throws BindException
+	 */
 	@PostMapping("/expenses/{id}")
 	public String createExpense(@Valid @ModelAttribute("newExpense") FinEntryDto newExpense, 
-			 BindingResult result, @PathVariable("id") String accId, Model model) {
+			 BindingResult result, @PathVariable("id") String accId, Model model) throws BindException {
 		if(result.hasErrors()) {
 			model.addAttribute("newExpense", new FinEntryDto());
 			return "redirect:/accounts/expenses/" + accId + "?error";
@@ -111,7 +138,14 @@ public class AccountController {
 		return "redirect:/accounts/expenses/" + accId;
 	}
 	
-	// delete 
+	
+	/**
+	 *  Delete the expense with the id in the url path from the specified account. Redirects user back to the expenses page
+	 * @param accId
+	 * @param expenseId
+	 * @param model
+	 * @return url path
+	 */
 	@GetMapping("/expenses/{id}/delete/{expId}")
 	public String deleteExpense(@PathVariable("id") String accId, @PathVariable("expId") Long expenseId, Model model) {
 		log.info(accId);
@@ -122,7 +156,15 @@ public class AccountController {
 	}
 	
 	
-	// Account Income 
+
+	/**
+	 * Returns the account's income page. Accepts the account id as a path variable and the model. Adds the current account, 
+	 * current income, income total, and income categories to the model. Also creates a new FinEntryDto for the 'add income'
+	 * form on the page. 
+	 * @param id
+	 * @param model
+	 * @return income view
+	 */
 	@GetMapping("/incomes/{id}")
 	public String getAccountIncomesPage(@PathVariable String id, Model model) {
 		model.addAttribute("id", id);
@@ -148,6 +190,16 @@ public class AccountController {
 		return "income";
 	}
 	
+	/**
+	 * PostMapping for adding new income to the account. If there are any errors in the request, BindException is thrown.
+	 * Exception is handled by checking if the BindingResult has errors and redirecting the user back to the page with a url
+	 * error parameter
+	 * @param newIncome
+	 * @param result
+	 * @param accId
+	 * @param model
+	 * @return url path
+	 */
 	@PostMapping("/incomes/{id}")
 	public String createIncome(@Valid @ModelAttribute("newIncome") FinEntryDto newIncome, 
 			 BindingResult result, @PathVariable("id") String accId, Model model) {
@@ -162,7 +214,13 @@ public class AccountController {
 		return "redirect:/accounts/incomes/" + accId;
 	}
 	
-	// delete 
+	/**
+	 *  Delete the income with the id in the url path from the specified account. Redirects user back to the income page
+	 * @param accId
+	 * @param incomeId
+	 * @param model
+	 * @return url path
+	 */
 	@GetMapping("/incomes/{id}/delete/{inId}")
 	public String deleteIncome(@PathVariable("id") String accId, @PathVariable("inId") Long incomeId, Model model) {
 		log.info(accId);
@@ -171,7 +229,15 @@ public class AccountController {
 		return "redirect:/accounts/incomes/" + accId;
 	}
 	
-	// Account Discretionary/ Wishlist 
+	/**
+	 * Returns the account's wishlist page. Accepts the account id as a path variable and the model. Adds the current account, 
+	 * current wishlist/ discretionary items, and the account balance (income - expenses) to the model. Also creates a new Discretionary
+	 * for the 'add wishlist item' form on the page. 
+	 * Error handling for the case when income or expense totals may be null. 
+	 * @param id
+	 * @param model
+	 * @return wishlist view 
+	 */
 	@GetMapping("/wishlist/{id}")
 	public String getAccountWishlistPage(@PathVariable String id, Model model) {
 		model.addAttribute("id", id);
@@ -200,6 +266,17 @@ public class AccountController {
 		return "wishlist";
 	}
 	
+	/**
+	 * PostMapping for creating a new wishlist item. Accepts request parameters from the wishlist form
+	 * Redirects users back to the wishlist page. 
+	 * @param id
+	 * @param name
+	 * @param desc
+	 * @param amount
+	 * @param user
+	 * @param model
+	 * @return url path 
+	 */
 	@PostMapping("/wishlist/{accId}")
 	public String createDiscretionary(@PathVariable("accId") String id, 
 			@RequestParam("name") String name,
@@ -207,14 +284,19 @@ public class AccountController {
 			@RequestParam("amount") BigDecimal amount,
 			@ModelAttribute("user") User user,
 			Model model) {
-		log.info("made it to the controller");
 		model.addAttribute("id", id);
 		Discretionary newWishlist = new Discretionary(name,amount, desc);
 		discretionaryService.saveNewDiscretionary(newWishlist, user, id);
 		return "redirect:/accounts/wishlist/" + id;
 	}
 	
-	// delete 
+	/**
+	 * Deletes an item from the wishlist. Redirects users back to the wishlist view for the current account. 
+	 * @param accId
+	 * @param wishlistId
+	 * @param model
+	 * @return url path 
+	 */
 	@GetMapping("/wishlist/{id}/delete/{wId}")
 	public String deleteWishlist(@PathVariable("id") String accId, @PathVariable("wId") Long wishlistId, Model model) {
 		log.info(accId);

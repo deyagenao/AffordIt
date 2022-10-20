@@ -17,6 +17,11 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Category is the model class that represents the different types of expenses and sources of income.
+ * @author deyaniragenao
+ *
+ */
 @Entity
 @Table(name = "categories")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -38,11 +43,22 @@ public class Category implements Serializable {
 	String type;
 	String description;
 	
+	/**
+	 * Category constructor with name and type parameters
+	 * @param name
+	 * @param type
+	 */
 	public Category(String name, String type) {
 		this.name = name;
 		this.type = type;
 	}
 	
+	/**
+	 * Category constructor with name, type, and description parameters
+	 * @param name
+	 * @param type
+	 * @param desc
+	 */
 	public Category(String name, String type, String desc) {
 		this.name = name;
 		this.type = type;

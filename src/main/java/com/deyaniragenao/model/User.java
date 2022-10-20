@@ -25,6 +25,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * User Model class represents user objects and is used to create the User Table. 
+ * @author deyaniragenao
+ *
+ */
 @Entity
 @Table(name = "users")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -68,6 +73,13 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	Set<Discretionary> discretionaryItems = new HashSet<>();
 
+	/**
+	 * User Constructor with firstName, lastName email and password parameters 
+	 * @param firstName
+	 * @param lastName
+	 * @param email
+	 * @param password
+	 */
 	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -75,41 +87,71 @@ public class User {
 		this.password = password;
 	}
 	
-	// p.33 of Spring Data persistence 
+	/**
+	 * Helper method for adding account to user's set of accounts 
+	 * @param account
+	 */
 	public void addAccount(Account account) {
 		this.accounts.add(account);
 		account.getAccountUsers().add(this);
 	}
 	
+	/** 
+	 * Helper method for deleting an account from user's set of accounts 
+	 * @param account
+	 */
 	public void removeAccount(Account account) {
 		this.accounts.remove(account);
 		account.getAccountUsers().remove(this);
 	}
 	
-	//OneToMany Helper methods 
+	/**
+	 * helper method for adding an expense to a user's set of expenses
+	 * @param expense
+	 */
 	public void addExpense(Expense expense) {
 		this.getExpenses().add(expense);
 		expense.setUser(this);
 	}
 	
+	/**
+	 * helper method for removing an expense from user's set of expenses 
+	 * @param expense
+	 */
 	public void removeExpense(Expense expense) {
 		this.getExpenses().remove(expense);
 	}
 	
+	/**
+	 * helper method for adding an income object to user's set of income objects
+	 * @param income
+	 */
 	public void addIncome(Income income) {
 		this.getIncomes().add(income);
 		income.setUser(this);
 	}
 	
+	/**
+	 * helper method for removing an income object from a user 
+	 * @param income
+	 */
 	public void removeIncome(Income income) {
 		this.getIncomes().remove(income);
 	}
 	
+	/**
+	 * helper method for adding a discretionary item to user's set of items
+	 * @param discretionary
+	 */
 	public void addDiscretionary(Discretionary discretionary) {
 		this.getDiscretionaryItems().add(discretionary);
 		discretionary.setUser(this);
 	}
 	
+	/**
+	 * Helper method for removing a discretionary item from user 
+	 * @param discretionary
+	 */
 	public void removeDiscretionary(Discretionary discretionary) {
 		this.getDiscretionaryItems().remove(discretionary);
 	}
