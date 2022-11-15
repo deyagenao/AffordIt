@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,15 +80,23 @@ public class UserController {
 	 * @return user_home view
 	 * @throws NullPointerException
 	 */
-	@GetMapping("/")
-	public String getUserHome(Model model, @ModelAttribute("user") User user) throws NullPointerException {
+	@GetMapping({"/", "/{accId}"})
+	public String getUserHome(Model model, @ModelAttribute("user") User user,
+			@PathVariable(required = false) String accId) throws NullPointerException {
+		System.out.println("reached the getUserHome method");
 		Set<Account> userAccounts = new LinkedHashSet<>();
 		userAccounts = user.getAccounts();
 		log.info(userAccounts.toString());
 		if(userAccounts.isEmpty()) {
 			model.addAttribute("accStatus", "noAccounts");
 		} else {
-			Account currAcc = userAccounts.iterator().next();
+			Account currAcc = null;
+			if (accId == null) {
+				currAcc = userAccounts.iterator().next();
+			} else{
+				Optional<Account> currAccData = accountService.findById(accId);
+				currAcc = currAccData.get();
+			}
 			BigDecimal expenseTotal = expenseService.getSumOfAccountExpenses(currAcc.getId());
 			BigDecimal incomeTotal = incomeService.getSumOfAccountIncome(currAcc.getId());
 			BigDecimal balance;
@@ -105,6 +114,15 @@ public class UserController {
 			log.info(currAcc.getName());
 		}
 		return "user_home";
+	}
+	
+	@GetMapping("/switchAccount")
+	public String switchAccountView(@RequestParam String account, Model model) {
+		log.info(account);
+		if(account.equals("new-acc")) {
+			return "redirect:/home/addAccount";
+		}
+		return "redirect:/home/" + account;
 	}
 	
 	/**

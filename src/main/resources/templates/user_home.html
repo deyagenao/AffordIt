@@ -68,15 +68,16 @@
         </form>
       </div>
       <div th:if="${accStatus == 'hasAccounts'}" id="account-view">
-        <form action="" id="select-account">
+        <form method="get" th:action="@{/home/switchAccount}" id="select-account">
+          <p>Switch Account</p>
           <select name="account" class="form-input" id="select-acc-input">
-            <option th:each="account: ${accounts}" value="${account?.id}" th:text="${account?.name}"></option>
-            <option value="new-acc">Add New Account</option>
+            <option th:each="account: ${accounts}" th:value="${account?.id}" th:text="${account?.name}"></option>
+            <option th:value="new-acc">Add New Account</option>
           </select>
-          <div class="btn" id="select-acc-btn">Go</div>
+          <button type="submit" class="btn" id="select-acc-btn">Go</button>
         </form>
-        
-        <p id="acc-display">Your Account Number: <span id="account-no" style="display: none;" 
+        <h3>Viewing Account: <span th:text="${currentAccount?.name}"></span></h3>
+        <p id="acc-display">Account Number: <span id="account-no" style="display: none;" 
          th:text="${currentAccount?.id}"></span></p>
         <button class="btn" id="toggle-acc-no">Show</button>
         <div id="account-summary">

@@ -39,4 +39,4 @@ build/
 .LSOverride
 
 # Logging
-/logs/
+!**/logs/
